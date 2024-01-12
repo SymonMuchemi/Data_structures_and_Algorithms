@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * This program demonstrates the use of the fixed-size window technique
  * to find the maximum subarray size of an array of a specified size.
@@ -40,6 +42,7 @@ public class Main {
 
 		int maxSize1 = maxSubArray(testArray1, 3);
 
+		System.out.printf("Array: %s%n", Arrays.toString(testArray1));
 		System.out.println("maxSize1 = " + maxSize1);
 	}
 }
