@@ -31,6 +31,31 @@ public class Main {
 
 		return maxSizeSubArray;
 	}
+	/**
+	 * finds the minimum subarray size using the sliding window technique
+	 * @param array the input array of integers
+	 * @param size the size of the subarray
+	 * @return the minimum subarray size
+	 * */
+	public static int minSubArray(int[] array, int size){
+		int minSize;
+		int subArrSize = 0;
+
+		for (int i = 0; i < size; i++) {
+			subArrSize += array[i];
+		}
+
+		minSize = subArrSize;
+
+		for (int i = 1; (size + i) < array.length; i++) {
+			subArrSize = subArrSize - array[i - 1];
+			subArrSize = subArrSize + array[size + i - 1];
+
+			minSize = Math.min(minSize, subArrSize);
+		}
+
+		return minSize;
+	}
 
 	/**
 	 * Main method to test the maxSubArray function.
@@ -41,8 +66,10 @@ public class Main {
 		int[] testArray1 = {0, 2, 3, 4, 5};
 
 		int maxSize1 = maxSubArray(testArray1, 3);
+		int minSize1 = minSubArray(testArray1, 3);
 
 		System.out.printf("Array: %s%n", Arrays.toString(testArray1));
 		System.out.println("maxSize1 = " + maxSize1);
+		System.out.println("minSize1 = " + minSize1);
 	}
 }
