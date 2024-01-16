@@ -1,10 +1,10 @@
-import java.util.Arrays;
+package com.symon.arrays;
 
 /**
- * This program demonstrates the use of the fixed-size window technique
+ * This program demonstrates the use of the sliding window algorithm
  * to find the maximum subarray size of an array of a specified size.
  */
-public class Main {
+public class SlidingWindow {
 	/**
 	 * Finds the maximum subarray size using the fixed-size window technique.
 	 *
@@ -12,7 +12,7 @@ public class Main {
 	 * @param size  The size of the fixed window to consider.
 	 * @return The maximum subarray size.
 	 */
-	public static int maxSubArray(int[] array, int size){
+	public int maxSubArray(int[] array, int size){
 		int maxSizeSubArray = 0;
 		int subArraySize = 0;
 
@@ -37,7 +37,7 @@ public class Main {
 	 * @param size the size of the subarray
 	 * @return the minimum subarray size
 	 * */
-	public static int minSubArray(int[] array, int size){
+	public int minSubArray(int[] array, int size){
 		int minSize;
 		int subArrSize = 0;
 
@@ -58,18 +58,61 @@ public class Main {
 	}
 
 	/**
-	 * Main method to test the maxSubArray function.
+	 * finds the sum of the smallest subarray whose sum is greater than or equal to size
 	 *
-	 * @param args Command-line arguments (not used in this example).
-	 */
+	 * @param arr the integer array
+	 * @param target the summation of the subarray
+	 * @return the size of the smallest subarray
+	 * */
+	public int smallestSubArrayCount(int [] arr, int target){
+		int minCount = Integer.MAX_VALUE;
+		int len = arr.length;
+
+		for (int i = 0; i < len; i++) {
+			int sum = 0;
+			int count = 0;
+
+			for (int j = i; j < len; j++) {
+				sum += arr[j];
+				count += 1;
+
+				if (sum >= target)
+				{
+					minCount = Math.min(minCount, count);
+					break;
+				}
+			}
+		}
+
+		return minCount;
+	}
+	public int minSubArrayLen(int target, int[] nums) {
+		int minCount = Integer.MAX_VALUE;
+		int n = nums.length;
+
+		for (int i = 0; i <= (n - 1); i++){
+			int sum = 0;
+			int count = 0;
+
+			for (int j = i; j < n; j++){
+				sum += nums[j];
+				count += 1;
+
+				if (sum >= target){
+					minCount = Math.min(minCount, count);
+					break;
+				}
+
+			}
+		}
+
+		if (minCount == Integer.MAX_VALUE)
+			minCount = 0;
+
+		return minCount;
+	}
+
 	public static void main(String[] args) {
-		int[] testArray1 = {0, 2, 3, 4, 5};
 
-		int maxSize1 = maxSubArray(testArray1, 3);
-		int minSize1 = minSubArray(testArray1, 3);
-
-		System.out.printf("Array: %s%n", Arrays.toString(testArray1));
-		System.out.println("maxSize1 = " + maxSize1);
-		System.out.println("minSize1 = " + minSize1);
 	}
 }
